@@ -145,22 +145,91 @@ class _DashboardScreenState
                         "${transaction.category} • ${transaction.type}",
                       ),
 
-                      trailing: Text(
+                      trailing: Row(
 
-                        "Rp ${transaction.amount}",
+                        mainAxisSize: MainAxisSize.min,
 
-                        style: TextStyle(
+                        children: [
 
-                          color:
+                          Text(
 
-                          transaction.type ==
-                              "Pemasukan"
-                              ? Colors.green
-                              : Colors.red,
+                            "Rp ${transaction.amount}",
 
-                          fontWeight:
-                          FontWeight.bold,
-                        ),
+                            style: TextStyle(
+
+                              color:
+
+                              transaction.type ==
+                                  "Pemasukan"
+                                  ? Colors.green
+                                  : Colors.red,
+
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+
+                          IconButton(
+
+                            onPressed: () {
+
+                              showDialog(
+
+                                context: context,
+
+                                builder: (context) {
+
+                                  return AlertDialog(
+
+                                    title: const Text(
+                                      "Hapus Transaksi",
+                                    ),
+
+                                    content: const Text(
+                                      "Yakin ingin menghapus transaksi?",
+                                    ),
+
+                                    actions: [
+
+                                      TextButton(
+
+                                        onPressed: () {
+
+                                          Navigator.pop(context);
+                                        },
+
+                                        child: const Text(
+                                          "Batal",
+                                        ),
+                                      ),
+
+                                      TextButton(
+
+                                        onPressed: () {
+
+                                          setState(() {
+
+                                            transactions.removeAt(index);
+                                          });
+
+                                          Navigator.pop(context);
+                                        },
+
+                                        child: const Text(
+                                          "Hapus",
+                                        ),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+                            },
+
+                            icon: const Icon(
+                              Icons.delete,
+                              color: Colors.red,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   );
