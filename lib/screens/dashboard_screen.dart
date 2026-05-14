@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-
 import '../data/transaction_data.dart';
 import 'add_transaction_screen.dart';
 import 'statistic_screen.dart';
+import 'pdf_screen.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -168,65 +168,93 @@ class _DashboardScreenState
               ),
             ),
 
-            const SizedBox(height: 10),
+        const SizedBox(height: 10),
 
-            SizedBox(
+        SizedBox(
 
-              width: double.infinity,
+          width: double.infinity,
 
-              child: ElevatedButton(
+          child: ElevatedButton(
 
-                onPressed: () async {
+            onPressed: () async {
 
-                  await Navigator.push(
+              await Navigator.push(
 
-                    context,
+                context,
 
-                    MaterialPageRoute(
+                MaterialPageRoute(
 
-                      builder: (context) =>
-                      const AddTransactionScreen(),
-                    ),
-                  );
-
-                  setState(() {
-
-                  });
-                },
-
-                child: const Text(
-                  "Tambah Transaksi",
+                  builder: (context) =>
+                  const AddTransactionScreen(),
                 ),
-              ),
+              );
+
+              setState(() {
+
+              });
+            },
+
+            child: const Text(
+              "Tambah Transaksi",
             ),
+          ),
+        ),
 
-            const SizedBox(height: 10),
+        const SizedBox(height: 10),
 
-            SizedBox(
+        SizedBox(
 
-              width: double.infinity,
+          width: double.infinity,
 
-              child: ElevatedButton(
+          child: ElevatedButton(
 
-                onPressed: () {
+            onPressed: () {
 
-                  Navigator.push(
+              Navigator.push(
 
-                    context,
+                context,
 
-                    MaterialPageRoute(
+                MaterialPageRoute(
 
-                      builder: (context) =>
-                      const StatisticScreen(),
-                    ),
-                  );
-                },
-
-                child: const Text(
-                  "Lihat Statistik",
+                  builder: (context) =>
+                  const StatisticScreen(),
                 ),
-              ),
+              );
+            },
+
+            child: const Text(
+              "Lihat Statistik",
             ),
+          ),
+        ),
+
+        const SizedBox(height: 10),
+
+        SizedBox(
+
+          width: double.infinity,
+
+          child: ElevatedButton(
+
+            onPressed: () {
+
+              Navigator.push(
+
+                context,
+
+                MaterialPageRoute(
+
+                  builder: (context) =>
+                  const PdfScreen(),
+                ),
+              );
+            },
+
+            child: const Text(
+              "Export PDF",
+            ),
+          ),
+        ),
           ],
         ),
       ),
