@@ -22,6 +22,8 @@ class _AddTransactionScreenState
 
   String selectedType = "Pemasukan";
 
+  String selectedCategory = "Makanan";
+
   @override
   Widget build(BuildContext context) {
 
@@ -96,6 +98,53 @@ class _AddTransactionScreenState
 
               decoration: const InputDecoration(
 
+                labelText: "Tipe",
+
+                border: OutlineInputBorder(),
+              ),
+            ),
+
+            const SizedBox(height: 16),
+
+            DropdownButtonFormField(
+
+              value: selectedCategory,
+
+              items: const [
+
+                DropdownMenuItem(
+                  value: "Makanan",
+                  child: Text("Makanan"),
+                ),
+
+                DropdownMenuItem(
+                  value: "Transport",
+                  child: Text("Transport"),
+                ),
+
+                DropdownMenuItem(
+                  value: "Belanja",
+                  child: Text("Belanja"),
+                ),
+
+                DropdownMenuItem(
+                  value: "Gaji",
+                  child: Text("Gaji"),
+                ),
+              ],
+
+              onChanged: (value) {
+
+                setState(() {
+
+                  selectedCategory = value!;
+                });
+              },
+
+              decoration: const InputDecoration(
+
+                labelText: "Kategori",
+
                 border: OutlineInputBorder(),
               ),
             ),
@@ -129,6 +178,8 @@ class _AddTransactionScreenState
                         double.parse(amount),
 
                         type: selectedType,
+
+                        category: selectedCategory,
                       ),
                     );
 

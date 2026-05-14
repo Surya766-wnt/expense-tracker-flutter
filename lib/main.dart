@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'screens/dashboard_screen.dart';
 
 void main() {
@@ -10,11 +11,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return MaterialApp(
 
       debugShowCheckedModeBanner: false,
 
-      home: DashboardScreen(),
+      title: 'Expense Tracker',
+
+      theme: ThemeData(
+        primarySwatch: Colors.green,
+      ),
+
+      home: const DashboardScreen(),
     );
   }
 }

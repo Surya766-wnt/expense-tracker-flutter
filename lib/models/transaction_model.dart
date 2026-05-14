@@ -9,7 +9,7 @@ class TransactionModel {
     required this.title,
     required this.amount,
     required this.type,
-    final String category;
-  });
+    required this.category,
 
+  });
 }
