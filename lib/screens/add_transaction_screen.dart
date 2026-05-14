@@ -128,6 +128,16 @@ class _AddTransactionScreenState
                 ),
 
                 DropdownMenuItem(
+                  value: "Hiburan",
+                  child: Text("Hiburan"),
+                ),
+
+                DropdownMenuItem(
+                  value: "Tagihan",
+                  child: Text("Tagihan"),
+                ),
+
+                DropdownMenuItem(
                   value: "Gaji",
                   child: Text("Gaji"),
                 ),

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../data/transaction_data.dart';
 import 'add_transaction_screen.dart';
-import 'pdf_screen.dart';
 import 'statistic_screen.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -26,54 +25,80 @@ class _DashboardScreenState
       if (transaction.type ==
           "Pemasukan") {
 
-        totalSaldo += transaction.amount;
+        totalSaldo +=
+            transaction.amount;
 
       } else {
 
-        totalSaldo -= transaction.amount;
+        totalSaldo -=
+            transaction.amount;
       }
     }
 
     return Scaffold(
 
-      floatingActionButton:
-      FloatingActionButton(
-
-        backgroundColor: Colors.green,
-
-        onPressed: () async {
-
-          await Navigator.push(
-
-            context,
-
-            MaterialPageRoute(
-
-              builder: (context) =>
-              const AddTransactionScreen(),
-            ),
-          );
-
-          setState(() {
-
-          });
-        },
-
-        child: const Icon(
-          Icons.add,
-          color: Colors.white,
-        ),
-      ),
+      backgroundColor:
+      const Color(0xFF0D0D0D),
 
       appBar: AppBar(
+
+        backgroundColor:
+        const Color(0xFF121212),
+
+        elevation: 0,
+
         title: const Text(
           "Expense Tracker",
         ),
       ),
 
+      floatingActionButtonLocation:
+      FloatingActionButtonLocation
+          .endFloat,
+
+      floatingActionButton: Padding(
+
+        padding:
+        const EdgeInsets.only(
+          bottom: 140,
+        ),
+
+        child: FloatingActionButton(
+
+          backgroundColor:
+          Colors.green,
+
+          onPressed: () async {
+
+            await Navigator.push(
+
+              context,
+
+              MaterialPageRoute(
+
+                builder: (context) =>
+                const AddTransactionScreen(),
+              ),
+            );
+
+            setState(() {
+
+            });
+          },
+
+          child: const Icon(
+
+            Icons.add,
+
+            color: Colors.white,
+          ),
+        ),
+      ),
+
       body: Padding(
 
-        padding: const EdgeInsets.all(16),
+        padding:
+        const EdgeInsets.all(16),
 
         child: Column(
 
@@ -88,21 +113,25 @@ class _DashboardScreenState
 
               style: TextStyle(
 
-                fontSize: 20,
+                color: Colors.white,
+
+                fontSize: 18,
 
                 fontWeight:
                 FontWeight.bold,
               ),
             ),
 
-            const SizedBox(height: 10),
+            const SizedBox(height: 15),
 
             Container(
 
               width: double.infinity,
 
               padding:
-              const EdgeInsets.all(20),
+              const EdgeInsets.all(
+                20,
+              ),
 
               decoration: BoxDecoration(
 
@@ -118,18 +147,37 @@ class _DashboardScreenState
                 ),
 
                 borderRadius:
-                BorderRadius.circular(16),
+                BorderRadius.circular(
+                  20,
+                ),
+
+                boxShadow: [
+
+                  BoxShadow(
+
+                    color:
+                    Colors.green
+                        .withOpacity(
+                      0.3,
+                    ),
+
+                    blurRadius: 15,
+
+                    spreadRadius: 2,
+                  ),
+                ],
               ),
 
               child: Text(
 
-                "Rp $totalSaldo",
+                "Rp ${totalSaldo.toInt()}",
 
-                style: const TextStyle(
-
-                  fontSize: 28,
+                style:
+                const TextStyle(
 
                   color: Colors.white,
+
+                  fontSize: 28,
 
                   fontWeight:
                   FontWeight.bold,
@@ -137,7 +185,7 @@ class _DashboardScreenState
               ),
             ),
 
-            const SizedBox(height: 20),
+            const SizedBox(height: 25),
 
             const Text(
 
@@ -145,14 +193,16 @@ class _DashboardScreenState
 
               style: TextStyle(
 
-                fontSize: 20,
+                color: Colors.white,
+
+                fontSize: 18,
 
                 fontWeight:
                 FontWeight.bold,
               ),
             ),
 
-            const SizedBox(height: 10),
+            const SizedBox(height: 15),
 
             Expanded(
 
@@ -167,11 +217,64 @@ class _DashboardScreenState
                   final transaction =
                   transactions[index];
 
-                  return Card(
+                  return Container(
+
+                    margin:
+                    const EdgeInsets.only(
+                      bottom: 14,
+                    ),
+
+                    decoration:
+                    BoxDecoration(
+
+                      color: Colors.white
+                          .withOpacity(
+                        0.05,
+                      ),
+
+                      borderRadius:
+                      BorderRadius.circular(
+                        20,
+                      ),
+
+                      border: Border.all(
+
+                        color: Colors.white
+                            .withOpacity(
+                          0.08,
+                        ),
+                      ),
+
+                      boxShadow: [
+
+                        BoxShadow(
+
+                          color: Colors
+                              .green
+                              .withOpacity(
+                            0.08,
+                          ),
+
+                          blurRadius: 15,
+
+                          spreadRadius: 1,
+                        ),
+                      ],
+                    ),
 
                     child: ListTile(
 
+                      contentPadding:
+                      const EdgeInsets.symmetric(
+
+                        horizontal: 20,
+
+                        vertical: 10,
+                      ),
+
                       leading: CircleAvatar(
+
+                        radius: 26,
 
                         backgroundColor:
 
@@ -187,21 +290,52 @@ class _DashboardScreenState
                           transaction.type ==
                               "Pemasukan"
 
-                              ? Icons.arrow_downward
+                              ? Icons
+                              .arrow_downward
 
-                              : Icons.arrow_upward,
+                              : Icons
+                              .arrow_upward,
 
-                          color: Colors.white,
+                          color:
+                          Colors.white,
                         ),
                       ),
 
                       title: Text(
+
                         transaction.title,
+
+                        style:
+                        const TextStyle(
+
+                          color:
+                          Colors.white,
+
+                          fontWeight:
+                          FontWeight.bold,
+
+                          fontSize: 16,
+                        ),
                       ),
 
-                      subtitle: Text(
+                      subtitle: Padding(
 
-                        "${transaction.category} • ${transaction.type}",
+                        padding:
+                        const EdgeInsets.only(
+                          top: 4,
+                        ),
+
+                        child: Text(
+
+                          "${transaction.category} • ${transaction.type}",
+
+                          style:
+                          const TextStyle(
+
+                            color:
+                            Colors.white70,
+                          ),
+                        ),
                       ),
 
                       trailing: Row(
@@ -215,19 +349,24 @@ class _DashboardScreenState
 
                             "Rp ${transaction.amount}",
 
-                            style: TextStyle(
+                            style:
+                            TextStyle(
 
                               color:
 
                               transaction.type ==
                                   "Pemasukan"
 
-                                  ? Colors.green
+                                  ? Colors
+                                  .greenAccent
 
-                                  : Colors.red,
+                                  : Colors
+                                  .redAccent,
 
                               fontWeight:
                               FontWeight.bold,
+
+                              fontSize: 15,
                             ),
                           ),
 
@@ -235,73 +374,20 @@ class _DashboardScreenState
 
                             onPressed: () {
 
-                              showDialog(
+                              setState(() {
 
-                                context: context,
-
-                                builder: (context) {
-
-                                  return AlertDialog(
-
-                                    title:
-                                    const Text(
-                                      "Hapus Transaksi",
-                                    ),
-
-                                    content:
-                                    const Text(
-                                      "Yakin ingin menghapus transaksi?",
-                                    ),
-
-                                    actions: [
-
-                                      TextButton(
-
-                                        onPressed: () {
-
-                                          Navigator.pop(
-                                            context,
-                                          );
-                                        },
-
-                                        child:
-                                        const Text(
-                                          "Batal",
-                                        ),
-                                      ),
-
-                                      TextButton(
-
-                                        onPressed: () {
-
-                                          setState(() {
-
-                                            transactions.removeAt(
-                                              index,
-                                            );
-                                          });
-
-                                          Navigator.pop(
-                                            context,
-                                          );
-                                        },
-
-                                        child:
-                                        const Text(
-                                          "Hapus",
-                                        ),
-                                      ),
-                                    ],
-                                  );
-                                },
-                              );
+                                transactions.removeAt(
+                                  index,
+                                );
+                              });
                             },
 
                             icon: const Icon(
 
                               Icons.delete,
 
-                              color: Colors.red,
+                              color:
+                              Colors.redAccent,
                             ),
                           ),
                         ],
@@ -338,11 +424,6 @@ class _DashboardScreenState
 
                     child: Container(
 
-                      margin:
-                      const EdgeInsets.only(
-                        right: 10,
-                      ),
-
                       padding:
                       const EdgeInsets.all(
                         20,
@@ -352,13 +433,14 @@ class _DashboardScreenState
                       BoxDecoration(
 
                         color:
-                        const Color(
-                          0xFF1E1E1E,
+                        Colors.white
+                            .withOpacity(
+                          0.05,
                         ),
 
                         borderRadius:
                         BorderRadius.circular(
-                          16,
+                          20,
                         ),
                       ),
 
@@ -370,9 +452,10 @@ class _DashboardScreenState
 
                             Icons.pie_chart,
 
-                            color: Colors.green,
+                            color:
+                            Colors.green,
 
-                            size: 35,
+                            size: 34,
                           ),
 
                           SizedBox(height: 10),
@@ -382,8 +465,12 @@ class _DashboardScreenState
                             "Statistik",
 
                             style: TextStyle(
+
                               color:
                               Colors.white,
+
+                              fontWeight:
+                              FontWeight.bold,
                             ),
                           ),
                         ],
@@ -392,30 +479,17 @@ class _DashboardScreenState
                   ),
                 ),
 
+                const SizedBox(width: 16),
+
                 Expanded(
 
                   child: GestureDetector(
 
                     onTap: () {
 
-                      Navigator.push(
-
-                        context,
-
-                        MaterialPageRoute(
-
-                          builder: (context) =>
-                          const PdfScreen(),
-                        ),
-                      );
                     },
 
                     child: Container(
-
-                      margin:
-                      const EdgeInsets.only(
-                        left: 10,
-                      ),
 
                       padding:
                       const EdgeInsets.all(
@@ -426,13 +500,14 @@ class _DashboardScreenState
                       BoxDecoration(
 
                         color:
-                        const Color(
-                          0xFF1E1E1E,
+                        Colors.white
+                            .withOpacity(
+                          0.05,
                         ),
 
                         borderRadius:
                         BorderRadius.circular(
-                          16,
+                          20,
                         ),
                       ),
 
@@ -444,9 +519,10 @@ class _DashboardScreenState
 
                             Icons.picture_as_pdf,
 
-                            color: Colors.red,
+                            color:
+                            Colors.redAccent,
 
-                            size: 35,
+                            size: 34,
                           ),
 
                           SizedBox(height: 10),
@@ -456,8 +532,12 @@ class _DashboardScreenState
                             "Export PDF",
 
                             style: TextStyle(
+
                               color:
                               Colors.white,
+
+                              fontWeight:
+                              FontWeight.bold,
                             ),
                           ),
                         ],
