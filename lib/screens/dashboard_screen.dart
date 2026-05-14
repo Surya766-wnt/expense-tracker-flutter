@@ -20,7 +20,15 @@ class _DashboardScreenState
 
     for (var transaction in transactions) {
 
-      totalSaldo += transaction.amount;
+      if (transaction.type == "Pemasukan") {
+
+        totalSaldo += transaction.amount;
+
+      } else {
+
+        totalSaldo -= transaction.amount;
+
+      }
 
     }
 
@@ -66,6 +74,45 @@ class _DashboardScreenState
             ),
 
             const SizedBox(height: 20),
+
+            const Text(
+              "Daftar Transaksi",
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+
+            const SizedBox(height: 10),
+
+            Expanded(
+
+              child: ListView.builder(
+
+                itemCount: transactions.length,
+
+                itemBuilder: (context, index) {
+
+                  final transaction =
+                  transactions[index];
+
+                  return Card(
+
+                    child: ListTile(
+
+                      title: Text(
+                        transaction.title,
+                      ),
+
+                      subtitle: Text(
+                        "Rp ${transaction.amount}",
+                      ),
+
+                    ),
+                  );
+                },
+              ),
+            ),
 
             ElevatedButton(
 
