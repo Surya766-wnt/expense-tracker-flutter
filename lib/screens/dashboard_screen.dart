@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../data/transaction_data.dart';
 import 'add_transaction_screen.dart';
+import 'statistic_screen.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -28,7 +29,6 @@ class _DashboardScreenState
       } else {
 
         totalSaldo -= transaction.amount;
-
       }
     }
 
@@ -142,7 +142,7 @@ class _DashboardScreenState
                       ),
 
                       subtitle: Text(
-                        transaction.type,
+                        "${transaction.category} • ${transaction.type}",
                       ),
 
                       trailing: Text(
@@ -196,6 +196,34 @@ class _DashboardScreenState
 
                 child: const Text(
                   "Tambah Transaksi",
+                ),
+              ),
+            ),
+
+            const SizedBox(height: 10),
+
+            SizedBox(
+
+              width: double.infinity,
+
+              child: ElevatedButton(
+
+                onPressed: () {
+
+                  Navigator.push(
+
+                    context,
+
+                    MaterialPageRoute(
+
+                      builder: (context) =>
+                      const StatisticScreen(),
+                    ),
+                  );
+                },
+
+                child: const Text(
+                  "Lihat Statistik",
                 ),
               ),
             ),
