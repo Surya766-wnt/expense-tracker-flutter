@@ -1,11 +1,29 @@
 import 'package:flutter/material.dart';
 import 'add_transaction_screen.dart';
+import '../data/transaction_data.dart';
 
-class DashboardScreen extends StatelessWidget {
+class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
 
   @override
+  State<DashboardScreen> createState() =>
+      _DashboardScreenState();
+}
+
+class _DashboardScreenState
+    extends State<DashboardScreen> {
+
+  @override
   Widget build(BuildContext context) {
+
+    double totalSaldo = 0;
+
+    for (var transaction in transactions) {
+
+      totalSaldo += transaction.amount;
+
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Expense Tracker"),
@@ -37,8 +55,8 @@ class DashboardScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(16),
               ),
 
-              child: const Text(
-                "Rp 0",
+              child: Text(
+                "Rp $totalSaldo",
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 28,
@@ -51,9 +69,9 @@ class DashboardScreen extends StatelessWidget {
 
             ElevatedButton(
 
-              onPressed: () {
+              onPressed: () async {
 
-                Navigator.push(
+                await Navigator.push(
                   context,
 
                   MaterialPageRoute(
@@ -61,6 +79,10 @@ class DashboardScreen extends StatelessWidget {
                         AddTransactionScreen(),
                   ),
                 );
+
+                setState(() {
+
+                });
 
               },
 
