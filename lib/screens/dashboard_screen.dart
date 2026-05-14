@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'add_transaction_screen.dart';
+
 import '../data/transaction_data.dart';
+import 'add_transaction_screen.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -29,45 +30,59 @@ class _DashboardScreenState
         totalSaldo -= transaction.amount;
 
       }
-
     }
 
     return Scaffold(
+
       appBar: AppBar(
         title: const Text("Expense Tracker"),
       ),
 
       body: Padding(
+
         padding: const EdgeInsets.all(16),
 
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+
+          crossAxisAlignment:
+          CrossAxisAlignment.start,
 
           children: [
 
             const Text(
+
               "Total Saldo",
+
               style: TextStyle(
                 fontSize: 20,
+                fontWeight: FontWeight.bold,
               ),
             ),
 
             const SizedBox(height: 10),
 
             Container(
+
               width: double.infinity,
+
               padding: const EdgeInsets.all(20),
 
               decoration: BoxDecoration(
+
                 color: Colors.green,
-                borderRadius: BorderRadius.circular(16),
+
+                borderRadius:
+                BorderRadius.circular(16),
               ),
 
               child: Text(
+
                 "Rp $totalSaldo",
-                style: TextStyle(
-                  color: Colors.white,
+
+                style: const TextStyle(
+
                   fontSize: 28,
+                  color: Colors.white,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -76,7 +91,9 @@ class _DashboardScreenState
             const SizedBox(height: 20),
 
             const Text(
+
               "Daftar Transaksi",
+
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
@@ -100,43 +117,88 @@ class _DashboardScreenState
 
                     child: ListTile(
 
+                      leading: CircleAvatar(
+
+                        backgroundColor:
+
+                        transaction.type ==
+                            "Pemasukan"
+                            ? Colors.green
+                            : Colors.red,
+
+                        child: Icon(
+
+                          transaction.type ==
+                              "Pemasukan"
+                              ? Icons.arrow_downward
+                              : Icons.arrow_upward,
+
+                          color: Colors.white,
+                        ),
+                      ),
+
                       title: Text(
                         transaction.title,
                       ),
 
                       subtitle: Text(
-                        "Rp ${transaction.amount}",
+                        transaction.type,
                       ),
 
+                      trailing: Text(
+
+                        "Rp ${transaction.amount}",
+
+                        style: TextStyle(
+
+                          color:
+
+                          transaction.type ==
+                              "Pemasukan"
+                              ? Colors.green
+                              : Colors.red,
+
+                          fontWeight:
+                          FontWeight.bold,
+                        ),
+                      ),
                     ),
                   );
                 },
               ),
             ),
 
-            ElevatedButton(
+            const SizedBox(height: 10),
 
-              onPressed: () async {
+            SizedBox(
 
-                await Navigator.push(
-                  context,
+              width: double.infinity,
 
-                  MaterialPageRoute(
-                    builder: (context) =>
-                        AddTransactionScreen(),
-                  ),
-                );
+              child: ElevatedButton(
 
-                setState(() {
+                onPressed: () async {
 
-                });
+                  await Navigator.push(
 
-              },
+                    context,
 
-              child: const Text(
-                "Tambah Transaksi",
+                    MaterialPageRoute(
+
+                      builder: (context) =>
+                      const AddTransactionScreen(),
+                    ),
+                  );
+
+                  setState(() {
+
+                  });
+                },
+
+                child: const Text(
+                  "Tambah Transaksi",
+                ),
               ),
-            )
+            ),
           ],
         ),
       ),

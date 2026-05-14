@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import '../models/transaction_model.dart';
+
 import '../data/transaction_data.dart';
+import '../models/transaction_model.dart';
 
 class AddTransactionScreen extends StatefulWidget {
-
   const AddTransactionScreen({super.key});
 
   @override
@@ -28,12 +28,11 @@ class _AddTransactionScreenState
     return Scaffold(
 
       appBar: AppBar(
-        title: const Text(
-          "Tambah Transaksi",
-        ),
+        title: const Text("Tambah Transaksi"),
       ),
 
       body: Padding(
+
         padding: const EdgeInsets.all(16),
 
         child: Column(
@@ -41,10 +40,13 @@ class _AddTransactionScreenState
           children: [
 
             TextField(
+
               controller: titleController,
 
               decoration: const InputDecoration(
+
                 labelText: "Nama Transaksi",
+
                 border: OutlineInputBorder(),
               ),
             ),
@@ -52,12 +54,48 @@ class _AddTransactionScreenState
             const SizedBox(height: 16),
 
             TextField(
+
               controller: amountController,
 
               keyboardType: TextInputType.number,
 
               decoration: const InputDecoration(
+
                 labelText: "Nominal",
+
+                border: OutlineInputBorder(),
+              ),
+            ),
+
+            const SizedBox(height: 16),
+
+            DropdownButtonFormField(
+
+              value: selectedType,
+
+              items: const [
+
+                DropdownMenuItem(
+                  value: "Pemasukan",
+                  child: Text("Pemasukan"),
+                ),
+
+                DropdownMenuItem(
+                  value: "Pengeluaran",
+                  child: Text("Pengeluaran"),
+                ),
+              ],
+
+              onChanged: (value) {
+
+                setState(() {
+
+                  selectedType = value!;
+                });
+              },
+
+              decoration: const InputDecoration(
+
                 border: OutlineInputBorder(),
               ),
             ),
@@ -65,6 +103,7 @@ class _AddTransactionScreenState
             const SizedBox(height: 20),
 
             SizedBox(
+
               width: double.infinity,
 
               child: ElevatedButton(
@@ -77,21 +116,27 @@ class _AddTransactionScreenState
                   String amount =
                       amountController.text;
 
-                  transactions.add(
+                  if (title.isNotEmpty &&
+                      amount.isNotEmpty) {
 
-                    TransactionModel(
-                      title: title,
-                      amount: double.parse(amount),
-                      type: selectedType,
-                    ),
-                  );
+                    transactions.add(
 
-                  Navigator.pop(context);
+                      TransactionModel(
+
+                        title: title,
+
+                        amount:
+                        double.parse(amount),
+
+                        type: selectedType,
+                      ),
+                    );
+
+                    Navigator.pop(context);
+                  }
                 },
 
-                child: const Text(
-                  "Simpan",
-                ),
+                child: const Text("Simpan"),
               ),
             ),
           ],
