@@ -19,7 +19,23 @@ class MyApp extends StatelessWidget {
       title: 'Expense Tracker',
 
       theme: ThemeData(
-        primarySwatch: Colors.green,
+
+        brightness: Brightness.dark,
+
+        scaffoldBackgroundColor:
+        const Color(0xFF121212),
+
+        primaryColor: Colors.green,
+
+        appBarTheme: const AppBarTheme(
+
+          backgroundColor:
+          Color(0xFF1E1E1E),
+
+          elevation: 0,
+        ),
+
+        cardColor: const Color(0xFF1E1E1E),
       ),
 
       home: const DashboardScreen(),

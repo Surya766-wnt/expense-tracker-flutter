@@ -1,5 +1,4 @@
 class TransactionModel {
-
   final String title;
   final double amount;
   final String type;
@@ -10,6 +9,5 @@ class TransactionModel {
     required this.amount,
     required this.type,
     required this.category,
-
   });
 }

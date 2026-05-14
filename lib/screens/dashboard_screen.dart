@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+
 import '../data/transaction_data.dart';
 import 'add_transaction_screen.dart';
-import 'statistic_screen.dart';
 import 'pdf_screen.dart';
+import 'statistic_screen.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -22,7 +23,8 @@ class _DashboardScreenState
 
     for (var transaction in transactions) {
 
-      if (transaction.type == "Pemasukan") {
+      if (transaction.type ==
+          "Pemasukan") {
 
         totalSaldo += transaction.amount;
 
@@ -34,8 +36,39 @@ class _DashboardScreenState
 
     return Scaffold(
 
+      floatingActionButton:
+      FloatingActionButton(
+
+        backgroundColor: Colors.green,
+
+        onPressed: () async {
+
+          await Navigator.push(
+
+            context,
+
+            MaterialPageRoute(
+
+              builder: (context) =>
+              const AddTransactionScreen(),
+            ),
+          );
+
+          setState(() {
+
+          });
+        },
+
+        child: const Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
+      ),
+
       appBar: AppBar(
-        title: const Text("Expense Tracker"),
+        title: const Text(
+          "Expense Tracker",
+        ),
       ),
 
       body: Padding(
@@ -54,8 +87,11 @@ class _DashboardScreenState
               "Total Saldo",
 
               style: TextStyle(
+
                 fontSize: 20,
-                fontWeight: FontWeight.bold,
+
+                fontWeight:
+                FontWeight.bold,
               ),
             ),
 
@@ -65,11 +101,21 @@ class _DashboardScreenState
 
               width: double.infinity,
 
-              padding: const EdgeInsets.all(20),
+              padding:
+              const EdgeInsets.all(20),
 
               decoration: BoxDecoration(
 
-                color: Colors.green,
+                gradient:
+                const LinearGradient(
+
+                  colors: [
+
+                    Color(0xFF00C853),
+
+                    Color(0xFF64DD17),
+                  ],
+                ),
 
                 borderRadius:
                 BorderRadius.circular(16),
@@ -82,8 +128,11 @@ class _DashboardScreenState
                 style: const TextStyle(
 
                   fontSize: 28,
+
                   color: Colors.white,
-                  fontWeight: FontWeight.bold,
+
+                  fontWeight:
+                  FontWeight.bold,
                 ),
               ),
             ),
@@ -95,8 +144,11 @@ class _DashboardScreenState
               "Daftar Transaksi",
 
               style: TextStyle(
+
                 fontSize: 20,
-                fontWeight: FontWeight.bold,
+
+                fontWeight:
+                FontWeight.bold,
               ),
             ),
 
@@ -106,9 +158,11 @@ class _DashboardScreenState
 
               child: ListView.builder(
 
-                itemCount: transactions.length,
+                itemCount:
+                transactions.length,
 
-                itemBuilder: (context, index) {
+                itemBuilder:
+                    (context, index) {
 
                   final transaction =
                   transactions[index];
@@ -123,14 +177,18 @@ class _DashboardScreenState
 
                         transaction.type ==
                             "Pemasukan"
+
                             ? Colors.green
+
                             : Colors.red,
 
                         child: Icon(
 
                           transaction.type ==
                               "Pemasukan"
+
                               ? Icons.arrow_downward
+
                               : Icons.arrow_upward,
 
                           color: Colors.white,
@@ -142,12 +200,14 @@ class _DashboardScreenState
                       ),
 
                       subtitle: Text(
+
                         "${transaction.category} • ${transaction.type}",
                       ),
 
                       trailing: Row(
 
-                        mainAxisSize: MainAxisSize.min,
+                        mainAxisSize:
+                        MainAxisSize.min,
 
                         children: [
 
@@ -161,10 +221,13 @@ class _DashboardScreenState
 
                               transaction.type ==
                                   "Pemasukan"
+
                                   ? Colors.green
+
                                   : Colors.red,
 
-                              fontWeight: FontWeight.bold,
+                              fontWeight:
+                              FontWeight.bold,
                             ),
                           ),
 
@@ -180,11 +243,13 @@ class _DashboardScreenState
 
                                   return AlertDialog(
 
-                                    title: const Text(
+                                    title:
+                                    const Text(
                                       "Hapus Transaksi",
                                     ),
 
-                                    content: const Text(
+                                    content:
+                                    const Text(
                                       "Yakin ingin menghapus transaksi?",
                                     ),
 
@@ -194,10 +259,13 @@ class _DashboardScreenState
 
                                         onPressed: () {
 
-                                          Navigator.pop(context);
+                                          Navigator.pop(
+                                            context,
+                                          );
                                         },
 
-                                        child: const Text(
+                                        child:
+                                        const Text(
                                           "Batal",
                                         ),
                                       ),
@@ -208,13 +276,18 @@ class _DashboardScreenState
 
                                           setState(() {
 
-                                            transactions.removeAt(index);
+                                            transactions.removeAt(
+                                              index,
+                                            );
                                           });
 
-                                          Navigator.pop(context);
+                                          Navigator.pop(
+                                            context,
+                                          );
                                         },
 
-                                        child: const Text(
+                                        child:
+                                        const Text(
                                           "Hapus",
                                         ),
                                       ),
@@ -225,7 +298,9 @@ class _DashboardScreenState
                             },
 
                             icon: const Icon(
+
                               Icons.delete,
+
                               color: Colors.red,
                             ),
                           ),
@@ -237,93 +312,161 @@ class _DashboardScreenState
               ),
             ),
 
-        const SizedBox(height: 10),
+            const SizedBox(height: 20),
 
-        SizedBox(
+            Row(
 
-          width: double.infinity,
+              children: [
 
-          child: ElevatedButton(
+                Expanded(
 
-            onPressed: () async {
+                  child: GestureDetector(
 
-              await Navigator.push(
+                    onTap: () {
 
-                context,
+                      Navigator.push(
 
-                MaterialPageRoute(
+                        context,
 
-                  builder: (context) =>
-                  const AddTransactionScreen(),
+                        MaterialPageRoute(
+
+                          builder: (context) =>
+                          const StatisticScreen(),
+                        ),
+                      );
+                    },
+
+                    child: Container(
+
+                      margin:
+                      const EdgeInsets.only(
+                        right: 10,
+                      ),
+
+                      padding:
+                      const EdgeInsets.all(
+                        20,
+                      ),
+
+                      decoration:
+                      BoxDecoration(
+
+                        color:
+                        const Color(
+                          0xFF1E1E1E,
+                        ),
+
+                        borderRadius:
+                        BorderRadius.circular(
+                          16,
+                        ),
+                      ),
+
+                      child: const Column(
+
+                        children: [
+
+                          Icon(
+
+                            Icons.pie_chart,
+
+                            color: Colors.green,
+
+                            size: 35,
+                          ),
+
+                          SizedBox(height: 10),
+
+                          Text(
+
+                            "Statistik",
+
+                            style: TextStyle(
+                              color:
+                              Colors.white,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                 ),
-              );
 
-              setState(() {
+                Expanded(
 
-              });
-            },
+                  child: GestureDetector(
 
-            child: const Text(
-              "Tambah Transaksi",
-            ),
-          ),
-        ),
+                    onTap: () {
 
-        const SizedBox(height: 10),
+                      Navigator.push(
 
-        SizedBox(
+                        context,
 
-          width: double.infinity,
+                        MaterialPageRoute(
 
-          child: ElevatedButton(
+                          builder: (context) =>
+                          const PdfScreen(),
+                        ),
+                      );
+                    },
 
-            onPressed: () {
+                    child: Container(
 
-              Navigator.push(
+                      margin:
+                      const EdgeInsets.only(
+                        left: 10,
+                      ),
 
-                context,
+                      padding:
+                      const EdgeInsets.all(
+                        20,
+                      ),
 
-                MaterialPageRoute(
+                      decoration:
+                      BoxDecoration(
 
-                  builder: (context) =>
-                  const StatisticScreen(),
+                        color:
+                        const Color(
+                          0xFF1E1E1E,
+                        ),
+
+                        borderRadius:
+                        BorderRadius.circular(
+                          16,
+                        ),
+                      ),
+
+                      child: const Column(
+
+                        children: [
+
+                          Icon(
+
+                            Icons.picture_as_pdf,
+
+                            color: Colors.red,
+
+                            size: 35,
+                          ),
+
+                          SizedBox(height: 10),
+
+                          Text(
+
+                            "Export PDF",
+
+                            style: TextStyle(
+                              color:
+                              Colors.white,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                 ),
-              );
-            },
-
-            child: const Text(
-              "Lihat Statistik",
+              ],
             ),
-          ),
-        ),
-
-        const SizedBox(height: 10),
-
-        SizedBox(
-
-          width: double.infinity,
-
-          child: ElevatedButton(
-
-            onPressed: () {
-
-              Navigator.push(
-
-                context,
-
-                MaterialPageRoute(
-
-                  builder: (context) =>
-                  const PdfScreen(),
-                ),
-              );
-            },
-
-            child: const Text(
-              "Export PDF",
-            ),
-          ),
-        ),
           ],
         ),
       ),
